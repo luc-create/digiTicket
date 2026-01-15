@@ -1,4 +1,4 @@
-package com.gigiTicket.models;
+package com.digiTicket.models;
 
 public enum Role {
     ROLE_CLIENT, // Pour les citoyens [cite: 26]
