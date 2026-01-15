@@ -1,4 +1,4 @@
-package com.gigiTicket.backend.security;
+package com.digiTicket.backend.security;
 
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
