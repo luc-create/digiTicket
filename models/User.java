@@ -1,4 +1,4 @@
-package com.gigiTicket.backend.models;
+package com.digiTicket.backend.models;
 
 import jakarta.persistence.*;
 import lombok.*;
