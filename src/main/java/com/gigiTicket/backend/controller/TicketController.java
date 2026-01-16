@@ -35,13 +35,13 @@ public class TicketController {
 	private final UserRepository userRepository;
 
 	@PostMapping
-	@Operation(summary = "Créer un ticket", description = "Crée un nouveau ticket pour le client authentifié")
+	@Operation(summary = "Créer un ticket", description = "Crée un nouveau ticket pour l'utilisateur authentifié (CLIENT ou ADMIN)")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Ticket créé avec succès"),
 			@ApiResponse(responseCode = "401", description = "Non authentifié"),
-			@ApiResponse(responseCode = "403", description = "Accès refusé - rôle CLIENT requis")
+			@ApiResponse(responseCode = "403", description = "Accès refusé - rôle CLIENT ou ADMIN requis")
 	})
-	@PreAuthorize("hasRole('CLIENT')")
+	@PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
 	@io.swagger.v3.oas.annotations.parameters.RequestBody(
 			description = "Données du ticket à créer",
 			required = true,

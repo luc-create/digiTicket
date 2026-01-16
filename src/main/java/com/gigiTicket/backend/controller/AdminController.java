@@ -38,6 +38,11 @@ public class AdminController {
 
 	@GetMapping("/users")
 	@Operation(summary = "Liste tous les utilisateurs", description = "Retourne la liste de tous les utilisateurs")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Liste des utilisateurs récupérée avec succès"),
+			@ApiResponse(responseCode = "401", description = "Non authentifié"),
+			@ApiResponse(responseCode = "403", description = "Accès refusé - rôle ADMIN requis")
+	})
 	public ResponseEntity<List<User>> getAllUsers() {
 		return ResponseEntity.ok(adminService.getAllUsers());
 	}
