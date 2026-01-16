@@ -1,6 +1,7 @@
 package com.gigiTicket.backend.entity;
 
 import jakarta.persistence.*;
+import lombok.Setter;
 
 @Entity
 @Table(name = "utilisateurs")
@@ -13,20 +14,39 @@ public class Utilisateur {
     @Column(nullable = false)
     private String nom;
 
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    @Setter
+    private boolean active = false;
+
     @Column(nullable = false, unique = true)
     private String email;
 
     private String telephone;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String role; // ADMIN, AGENT, USER
+    private Role role; // ADMIN, AGENT, USER
 
+    // Constructeur par défaut
     public Utilisateur() {}
 
+    // Constructeur pratique
+    public Utilisateur(String nom, String email, String password, Role role, String telephone) {
+        this.nom = nom;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.telephone = telephone;
+        this.active = true;
+    }
+
+    // Getters et setters
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -34,7 +54,6 @@ public class Utilisateur {
     public String getNom() {
         return nom;
     }
-
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -42,7 +61,6 @@ public class Utilisateur {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -50,16 +68,22 @@ public class Utilisateur {
     public String getTelephone() {
         return telephone;
     }
-
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
-
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 }
