@@ -4,12 +4,12 @@ import jakarta.persistence.*;
 import lombok.Setter;
 
 @Entity
-@Table(name = "utilisateurs")
+@Table(name = "users")
 public class Utilisateur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false)
     private String nom;
@@ -44,10 +44,10 @@ public class Utilisateur {
     }
 
     // Getters et setters
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -81,6 +81,10 @@ public class Utilisateur {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public boolean isActive() {
