@@ -93,6 +93,28 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 	}
 
+	@ExceptionHandler(RuntimeException.class)
+	public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException ex, WebRequest request) {
+		String message = ex.getMessage();
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		if (message != null && (message.contains("non trouvé") || message.contains("not found"))) {
+			status = HttpStatus.NOT_FOUND;
+		} else if (message != null && (message.contains("incorrect") || message.contains("Accès refusé"))) {
+			status = HttpStatus.UNAUTHORIZED;
+		}
+		
+		ErrorResponse errorResponse = ErrorResponse.builder()
+				.timestamp(LocalDateTime.now())
+				.status(status.value())
+				.error(status.getReasonPhrase())
+				.message(message != null ? message : "Une erreur est survenue")
+				.path(request.getDescription(false).replace("uri=", ""))
+				.build();
+		
+		return new ResponseEntity<>(errorResponse, status);
+	}
+
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> handleGenericException(Exception ex, WebRequest request) {
 		ErrorResponse errorResponse = ErrorResponse.builder()

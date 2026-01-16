@@ -4,9 +4,9 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:postgresql://localhost:5432/digiTicket
-    username: digiTicket_user
-    password: password123
+    url: jdbc:postgresql://localhost:5432/digiticket
+    username: digiticket_user
+    password: digiticket123
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -25,4 +25,11 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+    try-it-out-enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
+  write-only-properties: false
+  show-actuator: false
 
